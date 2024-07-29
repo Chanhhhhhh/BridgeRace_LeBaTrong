@@ -5,8 +5,9 @@ using UnityEngine;
 public class BuildState : IState<Bot>
 {
     public void OnEnter(Bot t)
-    {        
-        t.SetDestionation(LevelManager.Instance.finishPoint.position);
+    {
+        //Debug.Log("Build");
+        t.SetDestionation(LevelManager.Instance.GetFinishPos());
     }
 
     public void OnExecute(Bot t)

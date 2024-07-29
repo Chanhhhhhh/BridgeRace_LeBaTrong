@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class Stage : MonoBehaviour
 {
+    private List<Brick> bricks = new List<Brick>();
+    private List<Vector3> emptyPoints = new List<Vector3>();
+
     public float distance;
-    public List<Vector3> emptyPoints = new List<Vector3>();
     public List<ColorType> colorList = new List<ColorType>();
-    public List<Brick> bricks = new List<Brick>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -75,7 +77,7 @@ public class Stage : MonoBehaviour
     public IEnumerator RespawnBrick()
     {
         yield return new WaitForSeconds(3f);
-        if (emptyPoints.Count > 0)
+        if (emptyPoints.Count > 0 && colorList.Count>0)
         {
             OnBrick(colorList[Random.Range(0, colorList.Count)]);
         }

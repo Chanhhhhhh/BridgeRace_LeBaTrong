@@ -6,7 +6,8 @@ TagManager:
   tags:
   - Brick
   - FxTemporaire
-  - StartBox
+  - Bot
+  - FinishBox
   layers:
   - Default
   - TransparentFX

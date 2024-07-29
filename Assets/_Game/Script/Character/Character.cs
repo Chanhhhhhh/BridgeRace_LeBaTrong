@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.TextCore.Text;
 
 
@@ -25,16 +26,15 @@ public class Character : ColorObject
     [SerializeField] private Transform BoxBrick;
 
     protected bool IsFall;
+    protected List<Brick> ListBrick = new List<Brick>();
+
     private bool isCanMove;
     private string currentAnim;
+
     public float lenghtRaycast = 4f;
-    private List<Brick> ListBrick = new List<Brick>();
-
-
-
-
     public Stage stage;
     public int BrickCounts => ListBrick.Count;
+
 
     public virtual void OnInit()
     {

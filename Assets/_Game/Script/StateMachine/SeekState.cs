@@ -8,7 +8,9 @@ public class SeekState : IState<Bot>
 {
     public void OnEnter(Bot t)
     {
+        //Debug.Log("SeekState");
         t.changAnim(Constants.ANIM_RUN);
+        t.SetDestionation(t.TF.position);
     }
 
     public void OnExecute(Bot t)
@@ -42,7 +44,7 @@ public class SeekState : IState<Bot>
         Brick brick = t.stage.SeekBrickPoint(t.colorType);
         if (brick == null)
         {
-            t.changState(t.seekState);
+            t.changState(t.idleState);
         }
         else
         {

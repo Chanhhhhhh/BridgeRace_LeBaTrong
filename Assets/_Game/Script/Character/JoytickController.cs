@@ -34,6 +34,11 @@ public class JoytickController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.IsState(GameState.GamePlay))
+        {
+            joystickPanel.SetActive(false);
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             startPoint = MousePosition;

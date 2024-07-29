@@ -6,15 +6,18 @@ using UnityEngine;
 public class Player : Character
 {
     [SerializeField] private float moveSpeed = 5f;
+
     void Update()
     {
+        if (!GameManager.IsState(GameState.GamePlay))
+        {            
+            return;
+        }
         if (IsFall)
         {
             return;
         }
-        Vector3 nextPoint = JoytickController.direct * moveSpeed * Time.deltaTime + TF.position;       
-        //Debug.DrawRay(nextPoint, Vector3.down, Color.green, lenghtRaycast);
-
+        Vector3 nextPoint = JoytickController.direct * moveSpeed * Time.deltaTime + TF.position;
         if (Input.GetMouseButton(0))
         {
             changAnim(Constants.ANIM_RUN);
@@ -27,8 +30,6 @@ public class Player : Character
         {
             changAnim(Constants.ANIM_IDLE);
         }
-
-
         if (JoytickController.direct != Vector3.zero)
         {
             PlayerSkin.transform.forward = JoytickController.direct;
@@ -53,6 +54,12 @@ public class Player : Character
                 Falling();
                 Invoke(nameof(StandUp), 2f);
             }
+        }
+
+        if (other.CompareTag(Constants.TAG_FINISHBOX))
+        {
+            changAnim(Constants.ANIM_WIN);
+            LevelManager.Instance.OnWin();
         }
     }
 

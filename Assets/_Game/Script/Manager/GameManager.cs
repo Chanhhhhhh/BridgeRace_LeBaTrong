@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum GameState {MainMenu, GamePlay, Setting, Win, Lose }
+public enum GameState {MainMenu,Level, GamePlay, Pause, Win, Lose }
 public class GameManager : Singleton<GameManager>
 {
     private static GameState gameState;
     public static UnityEvent<GameState> OnGameStateChange;
     private void Awake()
     {
+        SaveManager.Instance.LoadData();
         ChangeState(GameState.MainMenu);
         Application.targetFrameRate= 60;
     }
@@ -18,6 +19,26 @@ public class GameManager : Singleton<GameManager>
         gameState = state;
         switch (gameState)
         {
+            case GameState.MainMenu:
+                UIManager.Instance.OpenUI<MainMenu>();
+                break;
+            case GameState.Level:
+                UIManager.Instance.OpenUI<LevelUI>();
+                break;
+            case GameState.GamePlay:
+                UIManager.Instance.OpenUI<GamePlayUI>();
+                break;
+            case GameState.Pause:
+                UIManager.Instance.OpenUI<PauseUI>();
+                break;
+            case GameState.Win:
+                UIManager.Instance.CloseUI<GamePlayUI>(2f);
+                UIManager.Instance.OpenUI<VictoryUI>(2f);
+                break;
+            case GameState.Lose:
+                UIManager.Instance.CloseUI<GamePlayUI>(2f);
+                UIManager.Instance.OpenUI<DefeatUI>(2f);
+                break;
             default:
                 break;
         }
