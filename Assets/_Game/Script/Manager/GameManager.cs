@@ -8,6 +8,7 @@ public class GameManager : Singleton<GameManager>
 {
     private static GameState gameState;
     public static UnityEvent<GameState> OnGameStateChange;
+
     private void Awake()
     {
         SaveManager.Instance.LoadData();
@@ -32,6 +33,7 @@ public class GameManager : Singleton<GameManager>
                 UIManager.Instance.OpenUI<PauseUI>();
                 break;
             case GameState.Win:
+                LevelManager.Instance.OnWin();
                 UIManager.Instance.CloseUI<GamePlayUI>(2f);
                 UIManager.Instance.OpenUI<VictoryUI>(2f);
                 break;

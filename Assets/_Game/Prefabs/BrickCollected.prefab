@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9002692058974672998}
-  - component: {fileID: 3392465641986587345}
+  - component: {fileID: 6049824311499104158}
   m_Layer: 0
   m_Name: BrickCollected
   m_TagString: Brick
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3392465641986587345
+--- !u!114 &6049824311499104158
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 572227222202580788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60acc4052031f984d88362a50135da30, type: 3}
+  m_Script: {fileID: 11500000, guid: 27f476ef604b6fa45919431929ab6a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   colorType: 0

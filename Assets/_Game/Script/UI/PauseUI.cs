@@ -9,6 +9,7 @@ public class PauseUI : UICanvas
         CloseDirectly();
         LevelManager.Instance.CloseLevel();
         GameManager.ChangeState(GameState.MainMenu);
+        Time.timeScale = 1f;
     }
 
     public void Continues()

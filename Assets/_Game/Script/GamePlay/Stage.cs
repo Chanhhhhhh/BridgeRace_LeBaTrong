@@ -27,7 +27,7 @@ public class Stage : MonoBehaviour
         {
             for (int j = 0; j < 8; j++)
             {
-                Vector3 newVector = new Vector3(x + distance * j, y, z - distance * i);
+                Vector3 newVector = new Vector3(x + distance * j, y + 0.1f, z - distance * i);
                 emptyPoints.Add(newVector);
             }
         }
@@ -48,19 +48,22 @@ public class Stage : MonoBehaviour
         {
             Vector3 rand = GetEmtyPoint();
             Brick brick = SimplePool.Spawn<Brick>(PoolType.Brick,rand,Quaternion.identity);
-            brick.gameObject.SetActive(true);
             bricks.Add(brick);
             brick.changColor(color);
+            brick.OnInit();
         }
     }
 
     public void RemoveBrick(Brick brick)
     {
-        StartCoroutine(RespawnBrick());
-        emptyPoints.Add(brick.TF.position);
-        SimplePool.Despawn(brick);
+        if(brick.colorType != ColorType.Default)
+        {
+            StartCoroutine(RespawnBrick());
+            emptyPoints.Add(brick.TF.position);
+        }
         bricks.Remove(brick);
-        brick.gameObject.SetActive(false);
+        brick.OnDespawn();
+        SimplePool.Despawn(brick);
     }
     
 
@@ -92,7 +95,7 @@ public class Stage : MonoBehaviour
                 brick = bricks[i];
                 break;
             }
-        }
+        } 
         return brick;
     }
 }

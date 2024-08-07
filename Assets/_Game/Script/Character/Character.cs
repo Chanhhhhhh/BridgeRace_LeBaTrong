@@ -1,9 +1,7 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.TextCore.Text;
 
 
 
@@ -26,7 +24,7 @@ public class Character : ColorObject
     [SerializeField] private Transform BoxBrick;
 
     protected bool IsFall;
-    protected List<Brick> ListBrick = new List<Brick>();
+    protected List<BrickCollected> ListBrick = new List<BrickCollected>();
 
     private bool isCanMove;
     private string currentAnim;
@@ -59,7 +57,7 @@ public class Character : ColorObject
         RaycastHit hit;
         if (Physics.Raycast(nextPoint + Vector3.up, Vector3.down, out hit, lenghtRaycast, StairLayer))
         {
-            Stair stair = hit.collider.gameObject.GetComponent<Stair>();
+            Stair stair = Cache.GetStair(hit.collider);
             if (stair.colorType != colorType && ListBrick.Count > 0)
             {
                 isCanMove = true;
@@ -73,14 +71,14 @@ public class Character : ColorObject
         }
         return isCanMove;
     }
-    public void AddBrick()
+    public void AddBrick(Transform tf)
     {
         int index = ListBrick.Count;
-        Brick Brick = SimplePool.Spawn<Brick>(PoolType.BrickCollected);
+        BrickCollected Brick = SimplePool.Spawn<BrickCollected>(PoolType.BrickCollected, tf.position, tf.rotation);
         Brick.changColor(colorType);
         Brick.TF.SetParent(BoxBrick);
         Brick.TF.localRotation = Quaternion.Euler(Vector3.zero);
-        Brick.TF.localPosition = Vector3.back * 0.5f + index * 0.25f * Vector3.up + Vector3.up * 1.5f;
+        Brick.TF.DOLocalMove(Vector3.back * 0.5f + index * 0.25f * Vector3.up + Vector3.up * 1.5f, 1f);
         ListBrick.Add(Brick);
     }
 
@@ -89,9 +87,9 @@ public class Character : ColorObject
         int index = ListBrick.Count - 1;
         if (index >= 0)
         {
-            Brick Brick = ListBrick[index];
+            BrickCollected Brick = ListBrick[index];
             ListBrick.RemoveAt(index);
-            SimplePool.Despawn(Brick);
+            Brick.OnDespawn();
         }
     }
 
@@ -99,7 +97,7 @@ public class Character : ColorObject
     {
         for (int i = 0; i < ListBrick.Count; i++)
         {
-            Destroy(ListBrick[i].gameObject);
+            ListBrick[i].OnDespawn();
         }
         ListBrick.Clear();
     }
@@ -126,9 +124,14 @@ public class Character : ColorObject
     {
         for (int i = 0; i < ListBrick.Count; i++)
         {
-            Vector3 randomPos = new Vector3(TF.position.x + Random.Range(1, 3), this.stage.transform.position.y, TF.position.z + Random.Range(1, 3));
-            Brick newBrick = SimplePool.Spawn<Brick>(PoolType.Brick, randomPos, Quaternion.identity);
+            Vector3 randomPos = new Vector3(TF.position.x + Random.Range(-3, 3), this.stage.transform.position.y, TF.position.z + Random.Range(-3, 3));
+            Quaternion randomRot = Quaternion.Euler(0, Random.Range(0, 360f), 0);
+            Brick newBrick = SimplePool.Spawn<Brick>(PoolType.Brick, this.TF.position + Vector3.up*2, randomRot);
             newBrick.changColor(ColorType.Default);
+            newBrick.TF.DOMove(randomPos, 1.5f).OnComplete(() =>
+            {
+                newBrick.OnInit();
+            });
         }
         ClearBrick();
     }
@@ -141,7 +144,7 @@ public class Character : ColorObject
             if (brick.colorType == colorType || brick.colorType == ColorType.Default)
             {
                 stage.RemoveBrick(brick);
-                AddBrick();
+                AddBrick(brick.TF);
             }
         }
 

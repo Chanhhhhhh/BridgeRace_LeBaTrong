@@ -80,7 +80,7 @@ public class Bot : Character
             {
                 Falling();
                 changState(fallState);
-            }
+            } 
         }
         if (other.CompareTag(Constants.TAG_FINISHBOX))
         {

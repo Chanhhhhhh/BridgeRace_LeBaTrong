@@ -159,7 +159,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc6ad3f38d517e846bf6f0b319dbcbb3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -204,7 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8932139255400102838}
   - component: {fileID: 6616479748879362573}
-  - component: {fileID: 9051022521597919111}
+  - component: {fileID: 5528716844421365800}
   m_Layer: 7
   m_Name: Stair
   m_TagString: Untagged
@@ -243,7 +243,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.8809426, y: 1, z: 1}
   m_Center: {x: -0.015965581, y: 0, z: 0}
---- !u!114 &9051022521597919111
+--- !u!114 &5528716844421365800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -319,7 +319,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc6ad3f38d517e846bf6f0b319dbcbb3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

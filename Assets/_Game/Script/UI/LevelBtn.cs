@@ -27,9 +27,10 @@ public class LevelBtn : MonoBehaviour
         txt_level.text = "Level " + (level + 1).ToString();
         action += () =>
         {
-            GameManager.ChangeState(GameState.GamePlay);
             UIManager.Instance.CloseUI<LevelUI>();
             LevelManager.Instance.CreateLevel(level);
+            //UIManager.Instance.GetUI<GamePlayUI>().SetLevel(level);
+            GameManager.ChangeState(GameState.GamePlay);
         };
         if (level <= SaveManager.Instance.UnlockLevel)
         {

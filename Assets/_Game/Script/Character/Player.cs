@@ -59,7 +59,7 @@ public class Player : Character
         if (other.CompareTag(Constants.TAG_FINISHBOX))
         {
             changAnim(Constants.ANIM_WIN);
-            LevelManager.Instance.OnWin();
+            GameManager.ChangeState(GameState.Win);
         }
     }
 

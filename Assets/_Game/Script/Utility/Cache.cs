@@ -57,6 +57,19 @@ public class Cache
         return m_ColliderBrick[key];
     }
 
+    public static Dictionary<Collider, Stair>  m_ColliderStair = new Dictionary<Collider, Stair>();
+
+
+    public static Stair GetStair(Collider key)
+    {
+        if (!m_ColliderStair.ContainsKey(key))
+        {
+            m_ColliderStair[key] = key.GetComponent<Stair>();
+        }
+
+        return m_ColliderStair[key];
+    }
+
 
 }
 

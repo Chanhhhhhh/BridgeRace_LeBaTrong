@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.tvOS;
 
 public enum ColorType { Default, Red, Green, Blue, Pink, Yellow };
 
@@ -15,7 +14,6 @@ public class LevelManager : Singleton<LevelManager>
     private int characterAmount => currentLevel.BotAmount + 1;
 
     [SerializeField] private Bot BotPref;
-    [SerializeField] private NavMeshData navMeshData;
     [SerializeField] private Player player;
 
     public List<Level> leves = new List<Level>();
@@ -26,8 +24,6 @@ public class LevelManager : Singleton<LevelManager>
 
     public void OnInit()
     {
-        NavMesh.RemoveAllNavMeshData();
-        NavMesh.AddNavMeshData(navMeshData);
         List<ColorType> colors = colorTypes; // color
         List<Vector3> startPoints = new List<Vector3>(); // position
         for (int i = 0; i < characterAmount; i++)
@@ -65,6 +61,7 @@ public class LevelManager : Singleton<LevelManager>
         }       
         level = index;
         currentLevel = Instantiate(leves[index], Vector3.zero, Quaternion.identity);
+        currentLevel.OnInit();
         if(currentLevel != null)
         {
             OnInit();
@@ -90,7 +87,6 @@ public class LevelManager : Singleton<LevelManager>
         {
             SaveManager.Instance.UnlockLevel = level + 1;
         }
-        GameManager.ChangeState(GameState.Win);
     }
 
     public void OnLose(Bot bot)

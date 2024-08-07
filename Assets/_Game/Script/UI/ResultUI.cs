@@ -5,16 +5,6 @@ using UnityEngine;
 
 public class ResultUI : UICanvas
 {
-    [SerializeField] private TextMeshProUGUI textScore;
-    public override void Setup()
-    {
-        base.Setup();
-        SetScore(LevelManager.Instance.GetScore());
-    }
-    public void SetScore(int score)
-    {
-        textScore.text = "Score   " + score.ToString();
-    }
     public void BackMainMenu()
     {
         CloseDirectly();
