@@ -6,11 +6,13 @@ using UnityEngine;
 
 public class SeekState : IState<Bot>
 {
+    int TargetBrick;
     public void OnEnter(Bot t)
     {
         //Debug.Log("SeekState");
         t.changAnim(Constants.ANIM_RUN);
         t.SetDestionation(t.TF.position);
+        TargetBrick = Random.Range(4, 9);
     }
 
     public void OnExecute(Bot t)
@@ -19,7 +21,7 @@ public class SeekState : IState<Bot>
         {
             return;
         }
-        if (t.BrickCounts >= Constants.TARGETBRICKS)
+        if (t.BrickCounts >= TargetBrick)
         {
             t.changState(t.buildState);
         }

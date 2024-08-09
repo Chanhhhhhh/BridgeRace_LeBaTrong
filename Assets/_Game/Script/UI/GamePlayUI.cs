@@ -9,11 +9,7 @@ public class GamePlayUI : UICanvas
     public override void Setup()
     {
         base.Setup();
-        Text_Level.text = "Level " + LevelManager.Instance.level + 1 ;
-    }
-    public void SetLevel(int level)
-    {
-        Text_Level.text = "Level " + level;
+        Text_Level.text = "Level " + (LevelManager.Instance.level + 1) ;
     }
     public void PauseGame()
     {

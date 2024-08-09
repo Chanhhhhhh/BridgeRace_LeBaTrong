@@ -34,11 +34,11 @@ public class GameManager : Singleton<GameManager>
                 break;
             case GameState.Win:
                 LevelManager.Instance.OnWin();
-                UIManager.Instance.CloseUI<GamePlayUI>(2f);
+                UIManager.Instance.CloseUI<GamePlayUI>(1.5f);
                 UIManager.Instance.OpenUI<VictoryUI>(2f);
                 break;
             case GameState.Lose:
-                UIManager.Instance.CloseUI<GamePlayUI>(2f);
+                UIManager.Instance.CloseUI<GamePlayUI>(1.5f);
                 UIManager.Instance.OpenUI<DefeatUI>(2f);
                 break;
             default:

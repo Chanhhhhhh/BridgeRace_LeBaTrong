@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,15 +6,6 @@ using UnityEngine;
 
 public class Character : ColorObject
 {
-    private Transform tf;
-    public Transform TF
-    {
-        get
-        {
-            tf = tf ?? gameObject.transform;
-            return tf;
-        }
-    }
     [SerializeField] protected LayerMask GroundLayer;
     [SerializeField] protected LayerMask StairLayer;
     [SerializeField] protected Animator animator;
@@ -23,21 +13,25 @@ public class Character : ColorObject
     [SerializeField] protected Collider col;
     [SerializeField] private Transform BoxBrick;
 
+    protected string CharName;
     protected bool IsFall;
     protected List<BrickCollected> ListBrick = new List<BrickCollected>();
 
     private bool isCanMove;
     private string currentAnim;
+    private NameTag nameTag;
 
     public float lenghtRaycast = 4f;
     public Stage stage;
     public int BrickCounts => ListBrick.Count;
 
 
-    public virtual void OnInit()
+    public override void OnInit()
     {
         changAnim(Constants.ANIM_IDLE);
         ClearBrick();
+        nameTag = SimplePool.Spawn<NameTag>(PoolType.NameTag);
+        nameTag.OnInit(CharName, this.TF);
     }
 
     public Vector3 checkGround(Vector3 nextPoint)
@@ -126,7 +120,7 @@ public class Character : ColorObject
         {
             Vector3 randomPos = new Vector3(TF.position.x + Random.Range(-3, 3), this.stage.transform.position.y, TF.position.z + Random.Range(-3, 3));
             Quaternion randomRot = Quaternion.Euler(0, Random.Range(0, 360f), 0);
-            Brick newBrick = SimplePool.Spawn<Brick>(PoolType.Brick, this.TF.position + Vector3.up*2, randomRot);
+            Brick newBrick = SimplePool.Spawn<Brick>(PoolType.Brick, this.TF.position + Vector3.up * 2, randomRot);
             newBrick.changColor(ColorType.Default);
             newBrick.TF.DOMove(randomPos, 1.5f).OnComplete(() =>
             {
@@ -135,7 +129,7 @@ public class Character : ColorObject
         }
         ClearBrick();
     }
-    
+
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Constants.TAG_BRICK))

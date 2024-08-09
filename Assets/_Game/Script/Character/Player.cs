@@ -7,6 +7,11 @@ public class Player : Character
 {
     [SerializeField] private float moveSpeed = 5f;
 
+    public override void OnInit()
+    {
+        CharName = "You";
+        base.OnInit();
+    }
     void Update()
     {
         if (!GameManager.IsState(GameState.GamePlay))

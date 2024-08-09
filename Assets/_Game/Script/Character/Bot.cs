@@ -24,9 +24,9 @@ public class Bot : Character
 
     public override void OnInit()
     {
+        CharName = Constants.GetName();
         base.OnInit();
         destionation = TF.position;
-        //changState(seekState);
     }
 
 

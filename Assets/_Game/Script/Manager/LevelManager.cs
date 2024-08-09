@@ -43,7 +43,7 @@ public class LevelManager : Singleton<LevelManager>
 
         // bot
         for (int i = 0; i < currentLevel.BotAmount; i++)
-        {
+        {            
             Bot bot = Instantiate(BotPref, startPoints[i], Quaternion.identity);
             bot.changColor(colors[i + 1]);
             bot.OnInit();

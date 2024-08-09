@@ -321,5 +321,5 @@ public enum PoolType
     none = 0,
     BrickCollected = 1,
     Brick = 2,
-    Stair = 3,
+    NameTag = 3,
 }

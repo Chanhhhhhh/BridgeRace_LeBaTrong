@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Analytics;
 
-public class Brick : GameUnit
+public class Brick : ColorObject
 {
     [SerializeField] private Collider col;
     public override void OnInit()
