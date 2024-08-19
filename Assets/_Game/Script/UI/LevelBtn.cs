@@ -29,7 +29,6 @@ public class LevelBtn : MonoBehaviour
         {
             UIManager.Instance.CloseUI<LevelUI>();
             LevelManager.Instance.CreateLevel(level);
-            //UIManager.Instance.GetUI<GamePlayUI>().SetLevel(level);
             GameManager.ChangeState(GameState.GamePlay);
         };
         if (level <= SaveManager.Instance.UnlockLevel)

@@ -6,16 +6,18 @@ public class PauseUI : UICanvas
 {
     public void BackMainMenu()
     {
+        Time.timeScale = 1f;
         CloseDirectly();
         LevelManager.Instance.CloseLevel();
         GameManager.ChangeState(GameState.MainMenu);
-        Time.timeScale = 1f;
+
     }
 
     public void Continues()
     {
+        Time.timeScale = 1f;
         CloseDirectly();
         GameManager.ChangeState(GameState.GamePlay);
-        Time.timeScale = 1f;
+
     }
 }

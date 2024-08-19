@@ -46,7 +46,6 @@ public class Cache
     }
 
     public static Dictionary<Collider, Brick> m_ColliderBrick = new Dictionary<Collider, Brick>();
-
     public static Brick GetBrick(Collider key)
     {
         if (!m_ColliderBrick.ContainsKey(key))
@@ -57,9 +56,8 @@ public class Cache
         return m_ColliderBrick[key];
     }
 
+
     public static Dictionary<Collider, Stair>  m_ColliderStair = new Dictionary<Collider, Stair>();
-
-
     public static Stair GetStair(Collider key)
     {
         if (!m_ColliderStair.ContainsKey(key))

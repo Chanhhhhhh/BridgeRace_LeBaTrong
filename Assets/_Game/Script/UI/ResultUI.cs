@@ -16,7 +16,8 @@ public class ResultUI : UICanvas
     {
         CloseDirectly();
         LevelManager.Instance.CloseLevel();
-        GameManager.ChangeState(GameState.GamePlay);
         LevelManager.Instance.CreateLevel(LevelManager.Instance.level);
+        GameManager.ChangeState(GameState.GamePlay);
+
     }
 }

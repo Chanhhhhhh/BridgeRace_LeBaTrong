@@ -24,7 +24,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void OnInit()
     {
-        List<ColorType> colors = colorTypes; // color
+        List<ColorType> colors = new List<ColorType>(colorTypes);
         List<Vector3> startPoints = new List<Vector3>(); // position
         for (int i = 0; i < characterAmount; i++)
         {
@@ -49,23 +49,17 @@ public class LevelManager : Singleton<LevelManager>
             bot.OnInit();
             listBot.Add(bot);
         }
-
+        UIManager.Instance.CloseUI<TransitionScene>();
     }
 
     public void CreateLevel(int index)
     {
-        //Debug.Log(index);
-        if(index > leves.Count-1)
+        if (index > leves.Count - 1)
         {
-            index = leves.Count-1;
-        }       
-        level = index;
-        currentLevel = Instantiate(leves[index], Vector3.zero, Quaternion.identity);
-        currentLevel.OnInit();
-        if(currentLevel != null)
-        {
-            OnInit();
+            index = leves.Count - 1;
         }
+        level = index;
+        StartCoroutine(InitLevel(index));       
     }
 
     public Vector3 GetFinishPos()
@@ -117,5 +111,16 @@ public class LevelManager : Singleton<LevelManager>
     public int GetScore()
     {
         return player.BrickCounts;
+    }
+
+    IEnumerator  InitLevel(int index)
+    {
+        yield return new WaitForSeconds(1f);
+        currentLevel = Instantiate(leves[index], Vector3.zero, Quaternion.identity);
+        currentLevel.OnInit();
+        if (currentLevel != null)
+        {
+            OnInit();
+        }
     }
 }

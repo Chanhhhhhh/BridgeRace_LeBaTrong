@@ -27,7 +27,8 @@ public class GameManager : Singleton<GameManager>
                 UIManager.Instance.OpenUI<LevelUI>();
                 break;
             case GameState.GamePlay:
-                UIManager.Instance.OpenUI<GamePlayUI>();
+                UIManager.Instance.OpenUI<GamePlayUI>(1f);
+                UIManager.Instance.OpenUI<TransitionScene>().RunAnim();
                 break;
             case GameState.Pause:
                 UIManager.Instance.OpenUI<PauseUI>();

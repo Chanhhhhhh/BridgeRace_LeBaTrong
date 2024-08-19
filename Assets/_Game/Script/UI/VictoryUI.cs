@@ -9,7 +9,7 @@ public class VictoryUI : ResultUI
     {
         CloseDirectly();
         LevelManager.Instance.CloseLevel();
+        LevelManager.Instance.CreateLevel(LevelManager.Instance.level + 1);
         GameManager.ChangeState(GameState.GamePlay);
-        LevelManager.Instance.CreateLevel(++LevelManager.Instance.level);
     }
 }
